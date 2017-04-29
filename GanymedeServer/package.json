@@ -1,0 +1,14 @@
+{
+  "name": "GanymedeStationServer",
+  "version": "1.0.0",
+  "description": "Host for garden control system data",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rob Savidge",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}
