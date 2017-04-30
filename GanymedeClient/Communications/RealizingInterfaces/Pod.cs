@@ -9,7 +9,6 @@ using System.Runtime.Serialization;
 
 namespace Ganymede.Communications
 {
-    [DataContract]
     internal class Pod : IPod
     {
         public Pod(string id)
@@ -17,20 +16,26 @@ namespace Ganymede.Communications
             Id = id;
         }
 
-        [DataMember]
+        public Pod(PodJson translateableObject)
+        {
+            Name = translateableObject.Name;
+            Id = translateableObject.Id;
+            Moisture = translateableObject.Moisture;
+            Temperature = translateableObject.Temp;
+            Light = translateableObject.Light;
+            Voltage = translateableObject.Voltage;
+        }
+
+        public string Name { get; set; }
+
         public string Id { get; private set; }
 
-        [DataMember]
         public int Moisture { get; set; }
 
-        [DataMember]
         public double Temperature { get; set; }
 
-        [DataMember]
         public int Light { get; set; }
 
-        [DataMember]
         public double Voltage { get; set; }
-
     }
 }
