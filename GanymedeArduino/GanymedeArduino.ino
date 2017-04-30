@@ -11,7 +11,7 @@ byte addresses[][6] = {"1Node","2Node"};
 /**********************************************************/
 
 // pin assignments
-#define MOISTURE_SENSOR A4
+#define MOISTURE_SENSOR A5
 #define LIGHT_SENSOR    A1
 #define TEMP_SENSOR     A2
 
@@ -37,7 +37,7 @@ void setup() {
    radio.begin();
    // Set the PA Level low to prevent power supply related issues due to
    // likelihood of close proximity of the devices. RF24_PA_MAX is default.
-   radio.setPALevel(RF24_PA_LOW);
+   //radio.setPALevel(RF24_PA_LOW);
    
    // Open a writing and reading pipe on each radio, with opposite addresses
    radio.openWritingPipe(addresses[0]);
