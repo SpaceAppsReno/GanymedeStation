@@ -1,0 +1,12 @@
+Could not create instance of Communication Scope.No comm scope available. 
+ Could not create instance of Communication Scope. 
+ System.UriFormatException: Invalid URI: The URI is empty.
+   at System.Uri.CreateThis(String uri, Boolean dontEscape, UriKind uriKind)
+   at System.Uri..ctor(String uriString)
+   at Ganymede.Communications.Comms..cctor() in E:\Projects\Ganymede\GanymedeClient\Communications\Comms.cs:line 18No comm scope available. 
+ Could not create instance of Communication Scope. 
+ System.UriFormatException: Invalid URI: The URI is empty.
+   at System.Uri.CreateThis(String uri, Boolean dontEscape, UriKind uriKind)
+   at System.Uri..ctor(String uriString)
+   at Ganymede.Communications.Comms..cctor() in E:\Projects\Ganymede\GanymedeClient\Communications\Comms.cs:line 18No comm scope available. 
+ 

@@ -1,0 +1,49 @@
+﻿<Page x:Class="Ganymede.GanymedeUI.Pods"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Ganymede"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="Pods">
+
+    <StackPanel Orientation="Vertical">
+        <ListBox VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible"
+                        Name="PodList"
+                        Height="300"
+                        HorizontalAlignment ="Stretch"
+                        SelectionChanged="onPodSelected">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <Grid HorizontalAlignment="Stretch" Width="150" Height="80">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Column="0" Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center">ID</TextBlock>
+                            <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">Voltage</TextBlock>
+                            <TextBlock Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">Light</TextBlock>
+                            <TextBlock Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center">Moisture</TextBlock>
+                            <TextBlock Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center">Temperature</TextBlock>
+                            <TextBlock Grid.Column="1" Grid.Row="0" Name="CurrentPodStationId" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                            <TextBox Grid.Column="1" Grid.Row="1" Name="CurrentPodStationVoltage" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                            <TextBox Grid.Column="1" Grid.Row="2" Name="CurrentPodStationLight" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                            <TextBox Grid.Column="1" Grid.Row="3" Name="CurrentPodStationMoisture" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                            <TextBox Grid.Column="1" Grid.Row="4" Name="CurrentPodStationTemperature" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                        </Grid>
+                        <Button Grid.Column="1" Grid.Row="4" Name="UpdatePod" VerticalAlignment="Center" HorizontalAlignment="Stretch" Click="onPodUpdateClicked"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </StackPanel>
+</Page>

@@ -1,0 +1,8 @@
+E:\Projects\Ganymede\GanymedeClient\Logger\bin\Debug\Logger.dll
+E:\Projects\Ganymede\GanymedeClient\Logger\bin\Debug\Logger.pdb
+E:\Projects\Ganymede\GanymedeClient\Logger\obj\Debug\Logger.dll
+E:\Projects\Ganymede\GanymedeClient\Logger\obj\Debug\Logger.pdb
+E:\Projects\GitHub\GanymedeStation\GanymedeClient\Logger\bin\Debug\Logger.dll
+E:\Projects\GitHub\GanymedeStation\GanymedeClient\Logger\bin\Debug\Logger.pdb
+E:\Projects\GitHub\GanymedeStation\GanymedeClient\Logger\obj\Debug\Logger.dll
+E:\Projects\GitHub\GanymedeStation\GanymedeClient\Logger\obj\Debug\Logger.pdb
