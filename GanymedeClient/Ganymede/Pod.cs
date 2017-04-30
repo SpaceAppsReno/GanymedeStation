@@ -38,7 +38,7 @@
         {
             get
             {
-                return Moisture;
+                return moisture;
             }
 
             set

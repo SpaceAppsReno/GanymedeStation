@@ -8,7 +8,8 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
-    using System.Threading.Tasks;
+    using System.Timers;
+    using System.Threading;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
@@ -28,30 +29,72 @@
 
         private PodModel currentSelectedPod = null;
 
-        private string currentBaseStationId;
-
         public Pods()
         {
             InitializeComponent();
-
-            Podies = new ObservableCollection<IPod>();
-            Podies.Add(new PodModel()
-            {
-                Id = "Pod1",
-                Light = 3,
-                Moisture = 4,
-                Temperature = 9.0,
-                Voltage = 909.0
-            });
-
             PodList.ItemsSource = Podies;
         }
+
+        System.Timers.Timer timer;
 
         protected override void OnInitialized(EventArgs args)
         {
             base.OnInitialized(args);
-            currentBaseStationId = Application.Current.Properties["BaseStationId"].ToString();
+            var baseStation = Application.Current.Properties["BaseStationId"] as string;
+            Podies = new ObservableCollection<IPod>();
+
+            timer = new System.Timers.Timer();
+            timer.Interval = 5000;
+            timer.Elapsed += (s, e) =>
+            {
+                var comm = CommunicationAccessor.GetCommScope();
+                var baseS = comm.GetABaseStation(baseStation);
+                if(baseS == null)
+                {
+                    var exception = new Exception("BaseStation's list was null. ");
+                    Logger.Logger.Write(exception.Message + "\n " + exception.StackTrace);
+                    throw exception;
+                }
+
+                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    Podies.Clear();
+                    foreach(var pod in baseS.PodsConnectedToBase)
+                    {
+                        Podies.Add(new PodModel()
+                        {
+                            Id = pod.Id,
+                            Light = pod.Light,
+                            Moisture = pod.Moisture,
+                            Temperature = pod.Temperature,
+                            Voltage = (pod.Voltage / 1000)
+                        });
+                    }
+                }));
+            };
+
+            timer.AutoReset = true;
+            timer.Start();
         }
+
+        //protected override void OnInitialized(EventArgs args)
+        //{
+        //    base.OnInitialized(args);
+        //    var baseStation =  Application.Current.Properties["BaseStation"] as IBaseStation;
+        //    Podies = new ObservableCollection<IPod>();
+
+        //    foreach(var pod in baseStation.PodsConnectedToBase)
+        //    {
+        //        Podies.Add(new PodModel()
+        //        {
+        //            Id = pod.Id,
+        //            Light = pod.Light,
+        //            Moisture = pod.Moisture,
+        //            Temperature = pod.Temperature,
+        //            Voltage = (pod.Voltage/1000)
+        //        });
+        //    }
+        //}
 
         private void onTextSelectionChanged(object sender, RoutedEventArgs args)
         {

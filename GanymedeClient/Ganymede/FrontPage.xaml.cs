@@ -7,8 +7,9 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Threading.Tasks;
+    using System.Threading;
     using System.Windows;
+    using System.Windows.Threading;
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Documents;
@@ -24,13 +25,97 @@
     /// </summary>
     public partial class FrontPage : Page
     {
-        private ObservableCollection<IBaseStation> BaseStations { get; set; }
+        public ObservableCollection<IBaseStation> BaseStations { get; set; }
 
         private IBaseStation currentBaseStation = null;
 
         public FrontPage()
         {
             InitializeComponent();
+
+            //var comm = CommunicationAccessor.GetCommScope();
+            //if(comm == null)
+            //{
+            //    var exception = new Exception("No comm scope available. ");
+            //    Logger.Logger.Write(exception.Message + "\n " + exception.StackTrace);
+            //    throw exception;
+            //}
+
+            //var baseStations = comm.GetAllBaseStations();
+            //if(baseStations == null)
+            //{
+            //    var exception = new Exception("BaseStation's list was null. ");
+            //    Logger.Logger.Write(exception.Message + "\n " + exception.StackTrace);
+            //    throw exception;
+            //}
+
+            //BaseStations = new ObservableCollection<IBaseStation>();
+            //foreach(var baseStation in baseStations)
+            //{
+            //    BaseStations.Add(baseStation);
+            //}
+
+            //BaseStations.Add(new BaseStationModel()
+            //{
+            //    Id = "Fake1",
+            //    FlowRate = 30,
+            //    Voltage = 50,
+            //    PodsConnectedToBase = new List<IPod>()
+            //    {
+            //        new PodModel()
+            //        {
+            //            Id = "FakePod1"
+            //        },
+
+            //        new PodModel()
+            //        {
+            //            Id = "FakePod2"
+            //        },
+
+            //        new PodModel()
+            //        {
+            //            Id = "FakePod3"
+            //        }
+            //    }
+            //});
+
+            //BaseStations.Add(new BaseStationModel()
+            //{
+            //    Id = "Fake2",
+            //    FlowRate = 10,
+            //    Voltage = 100,
+            //    PodsConnectedToBase = new List<IPod>()
+            //    {
+            //        new PodModel()
+            //        {
+            //            Id = "FakePod1"
+            //        },
+
+            //        new PodModel()
+            //        {
+            //            Id = "FakePod2"
+            //        },
+
+            //        new PodModel()
+            //        {
+            //            Id = "FakePod3"
+            //        }
+            //    }
+            //});
+
+            BaseStations = new ObservableCollection<IBaseStation>();
+            //this.DataContext = BaseStations;
+
+            //Application.Current.Dispatcher.BeginInvoke(new Action(() => this.MyObservableCollection.Add(myItem)));
+
+            BaseStationsList.ItemsSource = BaseStations;
+
+            //WorkInBackground();
+        }
+
+        void WorkInBackground()
+        {
+            var results = new List<IBaseStation>();
 
             var comm = CommunicationAccessor.GetCommScope();
             if(comm == null)
@@ -48,62 +133,58 @@
                 throw exception;
             }
 
-            BaseStations = new ObservableCollection<IBaseStation>();
-            foreach(var baseStation in baseStations)
+            // feed UI in packages no more than 100 items
+            while(results.Count > 0)
             {
-                BaseStations.Add(baseStation);
+                Application.Current.MainWindow.Dispatcher.BeginInvoke(
+                    new Action<List<IBaseStation>>(FeedUI),
+                    DispatcherPriority.Background,
+                    results.GetRange(0, Math.Min(results.Count, 100)));
+                results.RemoveRange(0, Math.Min(results.Count, 100));
             }
-
-            BaseStations.Add(new BaseStationModel()
-            {
-                Id = "Fake1",
-                FlowRate = 30,
-                Voltage = 50,
-                PodsConnectedToBase = new List<IPod>()
-                {
-                    new PodModel()
-                    {
-                        Id = "FakePod1"
-                    },
-
-                    new PodModel()
-                    {
-                        Id = "FakePod2"
-                    },
-
-                    new PodModel()
-                    {
-                        Id = "FakePod3"
-                    }
-                }
-            });
-
-            BaseStations.Add(new BaseStationModel()
-            {
-                Id = "Fake2",
-                FlowRate = 10,
-                Voltage = 100,
-                PodsConnectedToBase = new List<IPod>()
-                {
-                    new PodModel()
-                    {
-                        Id = "FakePod1"
-                    },
-
-                    new PodModel()
-                    {
-                        Id = "FakePod2"
-                    },
-
-                    new PodModel()
-                    {
-                        Id = "FakePod3"
-                    }
-                }
-            });
-
-            BaseStationsList.ItemsSource = BaseStations;
         }
+        void FeedUI(List<IBaseStation> items)
+        {
+            // items.Count must be small enough to keep UI looks alive
+            foreach(var item in items)
+            {
+                BaseStations.Add(item);
+            }
+        }
+
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+            Thread th = new Thread(() =>
+            {
+                var comm = CommunicationAccessor.GetCommScope();
+                if(comm == null)
+                {
+                    var exception = new Exception("No comm scope available. ");
+                    Logger.Logger.Write(exception.Message + "\n " + exception.StackTrace);
+                    throw exception;
+                }
+
+                var baseStations = comm.GetAllBaseStations();
+                if(baseStations == null)
+                {
+                    var exception = new Exception("BaseStation's list was null. ");
+                    Logger.Logger.Write(exception.Message + "\n " + exception.StackTrace);
+                    throw exception;
+                }
+
+                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    foreach(var station in baseStations)
+                    {
+                        BaseStations.Add(station);
+                    }
+                }));
+            });
+
+            th.Start();
+        }
+
 
         private void onListBoxItemSelected(object sender,
             System.Windows.Controls.SelectionChangedEventArgs args)

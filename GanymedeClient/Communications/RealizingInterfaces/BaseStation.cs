@@ -18,7 +18,7 @@ namespace Ganymede.Communications
 
         public BaseStation(BaseStationJson translateableObject)
         {
-            Id = translateableObject.Id;
+            Id = translateableObject.Name;
             Name = translateableObject.Name;
             FlowRate = translateableObject.FlowRate;
             Voltage = translateableObject.Voltage;

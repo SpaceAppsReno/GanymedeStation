@@ -24,8 +24,6 @@
     /// </summary>
     public partial class MainWindow : NavigationWindow
     {
-        private CommunicationScope comm;
-
         public MainWindow()
         {
             InitializeComponent();

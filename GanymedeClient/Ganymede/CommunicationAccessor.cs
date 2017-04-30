@@ -12,7 +12,10 @@
         {
             try
             {
-                comm = new CommunicationScope(uriAddress);
+                if(comm == null)
+                {
+                    comm = new CommunicationScope(uriAddress);
+                }
             }
             catch(Exception e)
             {

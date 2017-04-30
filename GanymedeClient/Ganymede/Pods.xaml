@@ -16,7 +16,7 @@
                         SelectionChanged="onPodSelected">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Vertical" Height="120" MaxHeight="120">
                         <Grid HorizontalAlignment="Stretch" Width="150" Height="80">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -34,13 +34,13 @@
                             <TextBlock Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">Light</TextBlock>
                             <TextBlock Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center">Moisture</TextBlock>
                             <TextBlock Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center">Temperature</TextBlock>
-                            <TextBlock Grid.Column="1" Grid.Row="0" Name="CurrentPodStationId" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
-                            <TextBox Grid.Column="1" Grid.Row="1" Name="CurrentPodStationVoltage" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
-                            <TextBox Grid.Column="1" Grid.Row="2" Name="CurrentPodStationLight" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
-                            <TextBox Grid.Column="1" Grid.Row="3" Name="CurrentPodStationMoisture" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
-                            <TextBox Grid.Column="1" Grid.Row="4" Name="CurrentPodStationTemperature" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                            <TextBlock Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Path=Id}"/>
+                            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=Voltage}" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=Light}" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=Moisture}" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=Temperature}" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
                         </Grid>
-                        <Button Grid.Column="1" Grid.Row="4" Name="UpdatePod" VerticalAlignment="Center" HorizontalAlignment="Stretch" Click="onPodUpdateClicked"/>
+                        <Button Name="UpdatePod" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Click="onPodUpdateClicked">Update</Button>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

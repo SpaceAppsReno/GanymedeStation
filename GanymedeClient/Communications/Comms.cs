@@ -37,7 +37,8 @@ namespace Ganymede.Communications
 
             foreach(string baseStationName in baseStationNames)
             {
-                baseStations.Add(GetABaseStation(baseStationName));
+                if(!string.IsNullOrEmpty(baseStationName))
+                    baseStations.Add(GetABaseStation(baseStationName));
             }
 
             return baseStations;

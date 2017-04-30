@@ -19,7 +19,7 @@ namespace Ganymede.Communications
         public Pod(PodJson translateableObject)
         {
             Name = translateableObject.Name;
-            Id = translateableObject.Id;
+            Id = translateableObject.Name;
             Moisture = translateableObject.Moisture;
             Temperature = translateableObject.Temp;
             Light = translateableObject.Light;
