@@ -83,6 +83,8 @@ exports.updatePod = function (req, res) {
         newPod = true;
     }
 
+    console.log('Updating pod: \n' + JSON.stringify(req.body));
+
     if(req.body.name) {
         pod.name = req.body.name;
     }

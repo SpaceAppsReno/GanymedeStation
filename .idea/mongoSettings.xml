@@ -14,6 +14,17 @@
             <SshTunnelingConfiguration />
           </option>
         </ServerConfiguration>
+        <ServerConfiguration>
+          <option name="label" value="AWS" />
+          <option name="serverUrls">
+            <list>
+              <option value="ec2-54-186-39-241.us-west-2.compute.amazonaws.com:27017" />
+            </list>
+          </option>
+          <option name="sshTunnelingConfiguration">
+            <SshTunnelingConfiguration />
+          </option>
+        </ServerConfiguration>
       </list>
     </option>
   </component>
