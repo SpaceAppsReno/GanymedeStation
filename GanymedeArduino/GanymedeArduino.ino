@@ -11,7 +11,7 @@ byte addresses[][6] = {"1Node","2Node"};
 /**********************************************************/
 
 // pin assignments
-#define MOISTURE_SENSOR A5
+#define MOISTURE_SENSOR A6
 #define LIGHT_SENSOR    A1
 #define TEMP_SENSOR     A2
 
@@ -126,7 +126,7 @@ int16_t resistanceToCelsius(float resistance)
    steinhart /= B_COEFFICIENT;                   // 1/B * ln(R/Ro)
    steinhart += 1.0 / (TEMPERATURE_NOMINAL + 273.15); // + (1/To)
    steinhart = 1.0 / steinhart;                 // Invert
-   steinhart -= 280.15;                         // convert to C
+   steinhart -= 273.15;                         // convert to C
    
    Serial.print("Temperature: "); 
    Serial.print(steinhart);
