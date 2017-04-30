@@ -1,0 +1,7 @@
+C:\Users\Jason\Documents\GitHub\GanymedeStation\GanymedeClient\Communications\bin\Debug\Communications.dll
+C:\Users\Jason\Documents\GitHub\GanymedeStation\GanymedeClient\Communications\bin\Debug\Communications.pdb
+C:\Users\Jason\Documents\GitHub\GanymedeStation\GanymedeClient\Communications\bin\Debug\Interfaces.dll
+C:\Users\Jason\Documents\GitHub\GanymedeStation\GanymedeClient\Communications\bin\Debug\Interfaces.pdb
+C:\Users\Jason\Documents\GitHub\GanymedeStation\GanymedeClient\Communications\obj\Debug\Communications.csprojResolveAssemblyReference.cache
+C:\Users\Jason\Documents\GitHub\GanymedeStation\GanymedeClient\Communications\obj\Debug\Communications.dll
+C:\Users\Jason\Documents\GitHub\GanymedeStation\GanymedeClient\Communications\obj\Debug\Communications.pdb

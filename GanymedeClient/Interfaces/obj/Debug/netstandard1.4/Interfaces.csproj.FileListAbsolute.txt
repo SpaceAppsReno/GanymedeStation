@@ -1,0 +1,7 @@
+C:\Users\Jason\Documents\GitHub\GanymedeStation\GanymedeClient\Interfaces\bin\Debug\netstandard1.4\Interfaces.deps.json
+C:\Users\Jason\Documents\GitHub\GanymedeStation\GanymedeClient\Interfaces\bin\Debug\netstandard1.4\Interfaces.dll
+C:\Users\Jason\Documents\GitHub\GanymedeStation\GanymedeClient\Interfaces\bin\Debug\netstandard1.4\Interfaces.pdb
+C:\Users\Jason\Documents\GitHub\GanymedeStation\GanymedeClient\Interfaces\obj\Debug\netstandard1.4\Interfaces.csprojResolveAssemblyReference.cache
+C:\Users\Jason\Documents\GitHub\GanymedeStation\GanymedeClient\Interfaces\obj\Debug\netstandard1.4\Interfaces.AssemblyInfo.cs
+C:\Users\Jason\Documents\GitHub\GanymedeStation\GanymedeClient\Interfaces\obj\Debug\netstandard1.4\Interfaces.dll
+C:\Users\Jason\Documents\GitHub\GanymedeStation\GanymedeClient\Interfaces\obj\Debug\netstandard1.4\Interfaces.pdb
