@@ -11,7 +11,7 @@ byte addresses[][6] = {"1Node","2Node"};
 /**********************************************************/
 
 // pin assignments
-#define MOISTURE_SENSOR A3
+#define MOISTURE_SENSOR A4
 #define LIGHT_SENSOR    A1
 #define TEMP_SENSOR     A2
 
@@ -52,19 +52,20 @@ void loop() {
 
    Serial.println(F("Now sending sensor data"));
    if (!radio.write( &sensorData, sizeof(sensorData) )){
-       Serial.println(F("failed to send sensor data"));
+       Serial.println(F("failed to send sensor data\n"));
    }
-   delay(10000);
+   delay(3000);
 }
 
 
 int16_t getMoistureReading()
 {
-  int moistValue = analogRead(MOISTURE_SENSOR);
-  Serial.print("Moisture: ");
-  Serial.println(moistValue);
-
-  return moistValue;
+   int moistValue = analogRead(MOISTURE_SENSOR);
+   
+   Serial.print("Moisture: ");
+   Serial.println(moistValue);
+   
+   return moistValue;
 }
 
 
@@ -125,7 +126,7 @@ int16_t resistanceToCelsius(float resistance)
    steinhart /= B_COEFFICIENT;                   // 1/B * ln(R/Ro)
    steinhart += 1.0 / (TEMPERATURE_NOMINAL + 273.15); // + (1/To)
    steinhart = 1.0 / steinhart;                 // Invert
-   steinhart -= 273.15;                         // convert to C
+   steinhart -= 280.15;                         // convert to C
    
    Serial.print("Temperature: "); 
    Serial.print(steinhart);
