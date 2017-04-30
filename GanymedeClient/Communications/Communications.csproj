@@ -42,6 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommunicationObjects\BaseStationJson.cs" />
+    <Compile Include="CommunicationObjects\NamesJson.cs" />
+    <Compile Include="CommunicationObjects\PodJSon.cs" />
     <Compile Include="HttpClientExtension.cs" />
     <Compile Include="RealizingInterfaces\BaseStation.cs" />
     <Compile Include="Comms.cs" />
@@ -55,9 +58,6 @@
       <Project>{11213d7e-51aa-4f4b-a963-989ad7d891db}</Project>
       <Name>Interfaces</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

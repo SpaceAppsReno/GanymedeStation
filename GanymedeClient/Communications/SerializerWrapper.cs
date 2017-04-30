@@ -42,7 +42,7 @@ namespace Ganymede.Communications
         public static T DeserializeFromJson<T>(Stream stream)
         {
             var serializer = new DataContractJsonSerializer(typeof(T));
-
+            stream.Position = 0;
             return (T)serializer.ReadObject(stream);
         }
 

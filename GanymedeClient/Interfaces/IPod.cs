@@ -12,6 +12,11 @@ namespace Ganymede.Interfaces
         string Id { get; }
 
         /// <summary>
+        /// Name of this Pod.
+        /// </summary>
+        string Name { get; set; }
+
+        /// <summary>
         /// Unit Less value representing the amount of moisture at a Pod.
         /// </summary>
         int Moisture { get; }

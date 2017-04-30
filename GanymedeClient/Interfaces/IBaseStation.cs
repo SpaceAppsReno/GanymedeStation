@@ -18,9 +18,19 @@ namespace Ganymede.Interfaces
         double FlowRate { get; }
 
         /// <summary>
+        /// The voltage of the baseStation. Similar to voltage on each Pod.
+        /// </summary>
+        double Voltage { get; }
+
+        /// <summary>
         /// The pods that are connected to this specific base.
         /// </summary>
-        IEnumerable<IPod> PodsConnectedToBase { get; }
+        IList<IPod> PodsConnectedToBase { get; }
+
+        /// <summary>
+        /// The names of the valves that are connected to this base.
+        /// </summary>
+        IList<string> ValvesConnectedToBase { get; }
 
         #endregion
     }
