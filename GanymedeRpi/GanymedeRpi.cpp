@@ -8,8 +8,12 @@
  03/17/2013 : Charles-Henri Hallard (http://hallard.me)
               Modified to use with Arduipi board http://hallard.me/arduipi
                     Changed to use modified bcm2835 and RF24 library
-TMRh20 2014 - Updated to work with optimized RF24 Arduino library
+                  
+TMRh20 2014 : Updated to work with optimized RF24 Arduino library
 
+ 04/30/2017 : Hunter Halcomb (hunterhalcomb@gmail.com)
+              Converted example code to a hacky Rpi server
+              for our NASA Space Apps challenge.
  */
 
 #include <cstdlib>
@@ -84,10 +88,10 @@ int main(int argc, char** argv) {
          scaleData(&sensorData);
 
          // report what we got
-         printf("Got moisture %d...\n", sensorData.moisture);
+         printf("\nGot moisture %d...\n", sensorData.moisture);
          printf("Got light %d...\n", sensorData.light);
          printf("Got temp %d...\n", sensorData.temp);
-         printf("Got volts %d...\n\n", sensorData.volts);
+         printf("Got volts %d...\n", sensorData.volts);
          
          
          delay(925); //Delay after payload responded to, minimize RPi CPU time
@@ -106,10 +110,13 @@ int main(int argc, char** argv) {
              "&name=Pod1";
          
          // send data to the server
-         sendDataToServer(json.str().c_str());
-         
-            
-         printf("\nUpload just happened!\n\n");
+         if(sensorData.volts > 0)
+         {
+            sendDataToServer(json.str().c_str());
+         }
+         else {
+            cout << "Voltage is 0. Upload skipped.";
+         }
          
          // reset uplaod clock
          startTime = clock();
@@ -128,8 +135,6 @@ void sendDataToServer(const char* json)
    // send this data to the server
    CURL *curl;
    CURLcode res;
-   
-   cout << json << endl;
    
    curl_global_init(CURL_GLOBAL_ALL);
    curl = curl_easy_init();
@@ -162,5 +167,5 @@ void scaleData(s_data* incomingData)
 {
    incomingData->moisture = (1024-incomingData->moisture)/10;
    incomingData->light = (incomingData->light)/3;
-   incomingData->temp = (incomingData->light + 10);
+   incomingData->temp = (incomingData->light + 10); // lol
 }
