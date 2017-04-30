@@ -1,0 +1,58 @@
+<section>
+  <div class="page-header">
+    <h1>Ganymede</h1>
+  </div>
+  <div class="list-group">
+    <li ng-repeat="baseStation in vm.baseStations" ui-sref="articles.view({ baseStationId: baseStation._id })" class="list-group-item">
+      <p>Name: {{baseStation.name}}</p>
+      <p>Flow: {{baseStation.flow}}</p>
+      <p>Voltage: {{baseStation.voltage}}</p>
+      <div>
+        <p>Valves:</p>
+        <li ng-repeat="valve in baseStation.valves" class="list-group-item">
+          <p>Name: {{valve.name}}</p>
+          <p>State: {{valve.state}}</p>
+        </li>
+      </div>
+      <div>
+        <p>Pods:</p>
+        <li ng-repeat="pod in baseStation.pods" class="list-group-item">
+          <p>Name: {{pod.name}}</p>
+          <p>Temperature: {{pod.temperature}}</p>
+          <p>Moisture: {{pod.moisture}}</p>
+          <p>Light: {{pod.light}}</p>
+          <p>Voltage: {{pod.voltage}}</p>
+        </li>
+      </div>
+    </li>
+  </div>
+
+  <form class="form" ng-submit="updateBaseStation()">
+    <div class="form-group">
+      <label for="baseStationName">Name: </label>
+      <input id="baseStationName" type="text" class="form-input" ng-model="newBaseStation.name">
+      <label for="baseStationFlow" type="text">Flow: </label>
+      <input id="baseStationFlow" type="text" class="form-input" ng-model="newBaseStation.flow">
+      <label for="baseStationVoltage" type="text">Voltage: </label>
+      <input id="baseStationVoltage" type="text" class="form-input" ng-model="newBaseStation.voltage">
+    </div>
+    <button type="submit">Update</button>
+  </form>
+
+  <form class="form" ng-submit="updatePod()">
+    <div class="form-group">
+      <label for="podName">Name: </label>
+      <input id="podName" type="text" class="form-input" ng-model="newPod.name">
+      <label for="podTemperature" type="text">Temperature: </label>
+      <input id="podTemperature" type="text" class="form-input" ng-model="newPod.temperature">
+      <label for="podMoisture" type="text">Moisture: </label>
+      <input id="podMoisture" type="text" class="form-input" ng-model="newPod.moisture">
+      <label for="podLight" type="text">Light: </label>
+      <input id="podLight" type="text" class="form-input" ng-model="newPod.light">
+      <label for="podVoltage" type="text">Voltage: </label>
+      <input id="podVoltage" type="text" class="form-input" ng-model="newPod.voltage">
+    </div>
+    <button type="submit">Update</button>
+  </form>
+
+</section>
