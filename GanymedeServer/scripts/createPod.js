@@ -8,11 +8,19 @@ if(process.argv.length < 3) {
     process.exit(-1);
 }
 
-console.log('Args:');
-process.argv.forEach(function(arg){
-    console.log(arg);
-});
+var podData = {
+    name: 'Pod1',
+    temperature: '16',
+    moisture: '255',
+    light: '50',
+    voltage: '3.3'
+};
+
 var baseStationName = process.argv[2];
+if(process.argv.length > 3){
+    podData.name = process.argv[3];
+}
+
 var baseStation;
 async.series([
     function(cb) {
@@ -40,13 +48,6 @@ async.series([
         req.end();
     }, function(cb) {
         console.log ('Creating Pod');
-        var podData = {
-            name: 'Pod1',
-            temperature: '16',
-            moisture: '255',
-            light: '50',
-            voltage: '3.3'
-        };
         var options = {
             hostname: 'localhost',
             port: 3000,
@@ -71,8 +72,10 @@ async.series([
             console.log('problem with request: ' + e.message);
             cb(e);
         });
+        var json_string = JSON.stringify(podData);
+        console.log ('Writing JSON to ' + options.path + '\n' + json_string + '\n');
         // write data to request body
-        req.write(JSON.stringify(podData));
+        req.write(json_string);
         req.end();
     }
 ], function(err, cb){

@@ -2,8 +2,8 @@
 
 var http = require("http");
 
-var requestJSON = {
-    name: 'Ben',
+var baseStationData = {
+    name: 'BaseStation1',
     flow: '9000',
     voltage: '3.3',
     valves: [
@@ -12,10 +12,14 @@ var requestJSON = {
     ]
 };
 
+if(process.argv.length > 2) {
+    baseStationData.name = process.argv[2];
+}
+
 var options = {
     hostname: 'localhost',
     port: 3000,
-    path: '/api/' + requestJSON.name,
+    path: '/api/' + baseStationData.name,
     method: 'PUT',
     headers: {
         'Content-Type': 'application/json'
@@ -32,6 +36,9 @@ var req = http.request(options, function(res) {
 req.on('error', function(e) {
     console.log('problem with request: ' + e.message);
 });
+
+var json_string = JSON.stringify(baseStationData);
+console.log ('Writing JSON to path ' + options.path + ': \n' + json_string + '\n');
 // write data to request body
-req.write(JSON.stringify(requestJSON));
+req.write(json_string);
 req.end();

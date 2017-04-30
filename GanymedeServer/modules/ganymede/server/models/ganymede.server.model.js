@@ -9,7 +9,7 @@ var mongoose = require('mongoose'),
 // Schema for Ganymede pod
 var PodSchema = new Schema({
     name: String,
-    baseStation: Schema.ObjectId,
+    baseStation: String,
     modified: Date,
     created: Date,
     voltage: Number,

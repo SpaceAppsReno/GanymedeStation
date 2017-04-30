@@ -79,7 +79,7 @@ exports.updatePod = function (req, res) {
     if(!pod) {
         pod = new Pod();
         pod.created = Date.now();
-        pod.baseStation = req.baseStation._id;
+        pod.baseStation = req.baseStation.name;
         newPod = true;
     }
 
